@@ -1,21 +1,10 @@
 import { Application, Request, Response, Router } from 'express'
-import * as UserController from '../controllers/UserController' 
+import * as TestController from '../controllers/TestController' 
 
 const router = Router();
 
-router.get('/users', async function(req: Request, res: Response): Promise<Response>{
-    // return res.status(200).send({
-    //     message: "API:Simple Call users Route from Here!",
-    //     data: []
-    // });
-    return await UserController.sampleActionForApi(req, res);
-});
-
-router.get('/posts', async function(req: Request, res: Response): Promise<Response>{
-    return res.status(200).send({
-        message: "API:Simple Call posts Route from Here!",
-        data: []
-    });
+router.get('/test', async function(req: Request, res: Response): Promise<Response>{
+    return await TestController.sampleActionForApi(req, res);
 });
 
 //Export All Routes
