@@ -14,7 +14,11 @@ export async function sampleActionForQueue(req: Request, res: Response): Promise
 }
 
 export async function sampleActionForWorker(req: Request, res: Response): Promise<Response> {
-    executeOnThread(12, 14)
+
+    let numOne: number = Number(req.query['testParam1']) //14
+    let numTwo: number = Number(req.query['testParam2']) //42
+
+    executeOnThread(numOne, numTwo)
 
     return res.status(200).send({
         message: "Action From Controller For Queue Reached Successfully",

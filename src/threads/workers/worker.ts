@@ -7,14 +7,13 @@ parentPort.on("message", (data: any) => {
   })
 })
 
-function getFib(num: number): number {
-  if (num === 0) {
-    return 0;
-  }
-  else if (num === 1) {
-    return 1;
+function getFib(num: number): any {
+  if (num === 0 || num === 1) {
+    return num;
   }
   else {
     return getFib(num - 1) + getFib(num - 2);
   }
 }
+
+
