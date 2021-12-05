@@ -14,9 +14,9 @@ worker.on("error", (error: Error) => {
   console.log(error);
 });
 
-worker.on("exit", (msg: string) => {
-  console.log('Exit ' + msg);
-});
+// worker.on("exit", (msg: string) => {
+//   console.log('Exit ' + msg);
+// });
 
 export const executeOnThread = (fistNum: number, secondNum: number) => {
   worker.postMessage({
