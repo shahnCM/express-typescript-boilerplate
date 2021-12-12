@@ -1,6 +1,7 @@
 import express, { Application, Router } from 'express'
 import { bootServer } from './server'
 import { apiRoutes, webRoutes } from './routes/index';
+import { rabbitMqConnect } from './channels/rabbitmq/index'
 
 const app: Application = express()
 
@@ -14,3 +15,6 @@ webRoutes(app);
 
 // Boot NodeJs Server
 bootServer(app)
+
+// Connect RabbitMq
+rabbitMqConnect()
