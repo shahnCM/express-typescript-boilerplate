@@ -11,6 +11,10 @@ router.get('/test-queue', async function(req: Request, res: Response): Promise<R
     return await TestController.sampleActionForQueue(req, res);
 });
 
+router.get('/test-rabbitmq', async function(req: Request, res: Response): Promise<Response>{
+    return await TestController.sampleActionForRabbitMq(req, res);
+});
+
 router.get('/test-worker', async function(req: Request, res: Response): Promise<Response>{
     return await TestController.sampleActionForWorker(req, res);
 });

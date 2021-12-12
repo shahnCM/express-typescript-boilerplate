@@ -3,12 +3,22 @@ import { paramsCheck } from '../exceptions/Exceptions'
 import { safeBackground as sbg } from '../utils/UtilityFunctions'
 import {sendNewEmail} from "../jobs/sampleEmail/emailJobQueue";
 import {executeOnThread} from "../threads/parents/parent";
+import { sampleMessageBroker } from '../channels/rabbitmq/brokers/sampleMsg';
 
 export async function sampleActionForQueue(req: Request, res: Response): Promise<Response> {
     await sendNewEmail(req.query)
 
     return res.status(200).send({
         message: "Action From Controller For Queue Reached Successfully",
+        data: req.query
+    })
+}
+
+export async function sampleActionForRabbitMq(req: Request, res: Response): Promise<Response> {
+    await sampleMessageBroker()
+
+    return res.status(200).send({
+        message: "Action From Controller For Rabbit MQ Reached Successfully",
         data: req.query
     })
 }
