@@ -15,7 +15,8 @@ export async function sampleActionForQueue(req: Request, res: Response): Promise
 }
 
 export async function sampleActionForRabbitMq(req: Request, res: Response): Promise<Response> {
-    await sampleMessageBroker()
+    const message: string = String(req.query['message'])
+    sampleMessageBroker(message)
 
     return res.status(200).send({
         message: "Action From Controller For Rabbit MQ Reached Successfully",
