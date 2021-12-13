@@ -15,7 +15,7 @@ export async function sampleMessageConsumer() : Promise<any> {
         })
     
     } catch (e) {
-    
+        
         console.log('From Consumer: ')
         console.log(e)
     

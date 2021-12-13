@@ -6,7 +6,7 @@ import {executeOnThread} from "../threads/parents/parent";
 import { sampleMessageBroker } from '../channels/rabbitmq/brokers/sampleMsg';
 
 export async function sampleActionForQueue(req: Request, res: Response): Promise<Response> {
-    await sendNewEmail(req.query)
+    sendNewEmail(req.query)
 
     return res.status(200).send({
         message: "Action From Controller For Queue Reached Successfully",

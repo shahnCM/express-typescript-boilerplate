@@ -16,6 +16,4 @@ webRoutes(app);
 // Boot NodeJs Server
 bootServer(app)
 
-// RabbitMqConsumersInit
-initiateRabbitMqConsumers()
 

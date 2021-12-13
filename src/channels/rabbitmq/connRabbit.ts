@@ -1,5 +1,4 @@
 import amqp from "amqplib"
-import { sampleMessageConsumer } from "./consumers/sampleMsg"
 
 // Initiate Connection
 export async function rabbitMqConnect(): Promise<any> {
@@ -21,7 +20,3 @@ export async function rabbitMqConnect(): Promise<any> {
     
 }
 
-// Initiate Consumers
-async function initiateConsumers(): Promise<any> {
-    await sampleMessageConsumer()
-}
