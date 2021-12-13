@@ -1,12 +1,9 @@
 import Bull from 'bull'
+import { redisConObj } from '../../configs/config';
 import {emailProcess} from "./emailJobProcess";
 
 const emailQueue = new Bull('email', {
-    redis: {
-        host: 'redis',
-        port: 6379,
-        password: ''
-    }
+    redis: redisConObj
 })
 
 emailQueue.process(emailProcess)

@@ -1,11 +1,12 @@
 import amqp from "amqplib"
+import { rabbitMqConnString } from "../../configs/config"
 
 // Initiate Connection
 export async function rabbitMqConnect(): Promise<any> {
     
     try {
 
-        const amqpServer = "amqp://rabbit:rabbit@rabbitmq:5672"
+        const amqpServer = rabbitMqConnString
         const connection = await amqp.connect(amqpServer)   
         
         console.log('RabbitMq Connection Successful')
