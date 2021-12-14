@@ -10,9 +10,9 @@ parentPort.on("message", (data: any) => {
 
 function getFib(num: number): any {
 
-  if(num > 45) { 
-    exit()
-  }
+  // if(num > 45) { 
+  //   exit()
+  // }
   
   if (num === 0 || num === 1) {
     return num;
