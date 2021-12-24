@@ -1,6 +1,6 @@
 import express, { Application, Router } from 'express'
 import { bootServer } from './server'
-import { apiRoutes, webRoutes } from './routes/index'
+import { initiateRoutes } from './routes/index'
 import { initiateRabbitMqConsumers } from './channels/rabbitmq/consumersInit'
 
 const app: Application = express()
@@ -10,10 +10,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 // Initiate Routes
-apiRoutes(app);
-webRoutes(app);
+initiateRoutes(app)
 
 // Boot NodeJs Server
 bootServer(app)
+
+// RabbitMqConsumersInit
+initiateRabbitMqConsumers()
 
 
