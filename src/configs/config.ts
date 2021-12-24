@@ -5,3 +5,5 @@ export const redisConObj: object = {
 }
 
 export const rabbitMqConnString: string = "amqp://rabbit:rabbit@rabbitmq:5672"
+
+export const uploadFolderName = 'uploads'

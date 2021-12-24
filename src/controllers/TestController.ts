@@ -51,6 +51,14 @@ export async function sampleActionForApi(req: Request, res: Response): Promise<R
 
 }
 
+export async function sampleActionForFileUploads(req: Request, res: Response): Promise<Response> {
+    
+    return res.status(200).send({
+        message: "API:File Upload Successful",
+        data: req.protocol
+    })
+}
+
 function logConsole(msg: string, iterations: any = 99999): any {
 
     if(paramsCheck([...arguments])) {

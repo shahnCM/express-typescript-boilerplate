@@ -1,4 +1,6 @@
 import { Application, Request, Response } from 'express'
+import multer from 'multer'
+import { UploadError } from '../errors/UploadError'
 import { routes as apiRoutes }  from './api'
 import { routes as webRoutes }  from './web'
 
@@ -19,13 +21,17 @@ export function initiateRoutes(app: Application): void {
     app.use((err: any, req: Request, res: Response, next: any): any => {
     
         if (res.headersSent) {
-            next('There was a problem!')
+            return next('There was a problem!')
         } 
+
+        if (err instanceof multer.MulterError || err instanceof UploadError) {
+            return res.status(422).send(err.message || 'There was an upload error!')
+        }
         
         if (err.message) {
-            res.status(err.status || 500).send(err.message)
+            return res.status(err.status || 500).send(err.message || 'There was an error!')
         }
 
-        res.send('There was an error!')
+        return res.status(500).send('Internal Server Error!')
     })
 }

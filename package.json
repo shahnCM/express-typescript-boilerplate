@@ -12,10 +12,12 @@
   "license": "MIT",
   "dependencies": {
     "@types/amqplib": "^0.8.2",
+    "@types/multer": "^1.4.7",
     "amqplib": "^0.8.0",
     "bull": "^3.15.6",
     "bullmq": "^1.54.6",
     "express": "^4.17.1",
+    "multer": "^1.4.4",
     "ts-node": "^10.4.0"
   },
   "devDependencies": {
