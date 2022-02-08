@@ -22,43 +22,38 @@ export function handleError(app: Application): any {
         if (err) {
 
             if (err instanceof multer.MulterError || err instanceof UploadError) {
-                const response = errorResponse(
+                return res.status(422).send(errorResponse(
                     422,
                     [{'msg': err.message || 'There was error while uploading file'}]
-                )
-                return res.status(422).send(response)
+                ))
             }
 
             if (err instanceof NotFoundError) {
-                const response = errorResponse(
+                return res.status(err.statusCode).send(errorResponse(
                     err.statusCode,
                     [{'msg': err.message || 'Not found'}]
-                )
-                return res.status(err.statusCode).send(response)
+                ))
             }
 
             if (err instanceof ValidationError) {
-                const response = errorResponse(
+                return res.status(err.statusCode).send(errorResponse(
                     err.statusCode,
                     err.errors
-                )
-                return res.status(err.statusCode).send(response)
+                ))
             }
 
             if (err instanceof AuthenticationError) {
-                const response = errorResponse(
+                return res.status(err.statusCode).send(errorResponse(
                     err.statusCode,
                     [{msg: err.message || 'Credentials do not match'}]
-                )
-                return res.status(err.statusCode).send(response)
+                ))
             }
 
             if (err instanceof AuthorizationError) {
-                const response = errorResponse(
+                return res.status(err.statusCode).send(errorResponse(
                     err.statusCode,
                     [{msg: err.message || 'Access denied'}]
-                )
-                return res.status(err.statusCode).send(response)
+                ))
             }
         }
     })
