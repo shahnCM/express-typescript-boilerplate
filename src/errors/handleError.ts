@@ -31,10 +31,10 @@ export function handleError(app: Application): any {
 
             if (err instanceof NotFoundError) {
                 const response = errorResponse(
-                    404,
+                    err.statusCode,
                     [{'msg': err.message || 'Not found'}]
                 )
-                return res.status(422).send(response)
+                return res.status(err.statusCode).send(response)
             }
 
             if (err instanceof ValidationError) {
@@ -42,7 +42,7 @@ export function handleError(app: Application): any {
                     err.statusCode,
                     err.errors
                 )
-                return res.status(400).send(response)
+                return res.status(err.statusCode).send(response)
             }
 
             if (err instanceof AuthenticationError) {
@@ -50,7 +50,7 @@ export function handleError(app: Application): any {
                     err.statusCode,
                     [{msg: err.message || 'Credentials do not match'}]
                 )
-                return res.status(403).send(response)
+                return res.status(err.statusCode).send(response)
             }
 
             if (err instanceof AuthorizationError) {
@@ -58,7 +58,7 @@ export function handleError(app: Application): any {
                     err.statusCode,
                     [{msg: err.message || 'Access denied'}]
                 )
-                return res.status(401).send(response)
+                return res.status(err.statusCode).send(response)
             }
         }
     })
