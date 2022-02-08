@@ -9,6 +9,6 @@ export function bootServer(app: Application): void {
             console.log(`Connected successfully on port ${port}`)
         });
     } catch (error: any) {
-        console.error(`Error occured: ${error.message}`)
+        console.error(`Error Occurred: ${error.message}`)
     }
 }

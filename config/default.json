@@ -1,0 +1,13 @@
+{
+    "uploadSettings-folderDestination": "./uploads",
+    "uploadSettings-fileSize": "1000000",
+    "jwtSettings-secret": "abc",
+    "jwtSettings-expiresIn": "3600",
+    "mysql-host": "mysql-5",
+    "mysql-user": "root",
+    "mysql-password": "root",
+    "mysql-database": "auto_part_dev",
+    "rabbitmq-conn-string": "amqp://rabbit:rabbit@rabbitmq:5672",
+    "redis-host": "redis",
+    "redis-port": "6379"
+}

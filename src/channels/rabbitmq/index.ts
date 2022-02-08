@@ -1,5 +1,6 @@
-// Brokers
-export { sampleMessageBroker }  from './brokers/sampleMsg'
+import { sampleConsumer } from "./consumers/sampleConsumer";
+export { sampleBroker } from "./brokers/sampleBroker"
 
-// Consumers
-export { sampleMessageConsumer }  from './consumers/sampleMsg'
+export async function initiateRabbitMqConsumers(): Promise<void>{
+    await sampleConsumer()
+}
