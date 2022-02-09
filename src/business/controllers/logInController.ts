@@ -9,23 +9,14 @@ import {SystemAdminLogInAttemptEventEmitter} from "../../events/emitters/SystemA
 // System Admin LogIn
 export async function logInSystemAdmin(req: Request, res: Response, next: NextFunction): Promise<any> {
 
-    SystemAdminLogInAttemptEventEmitter(SystemAdminLogInAttemptEvent, req.body)
+    // SystemAdminLogInAttemptEventEmitter(SystemAdminLogInAttemptEvent, req.body)
 
     const { email, password } = req.body
     const result = await grantToken(email, password)
 
-    if(result instanceof Error) {
-        return next(result)
-    }
-
-    // await dispatchEmailJob({email: email})
-
-    const response = successResponse(
-        200,
-        [{"auth-token": result}]
-    )
-
-    return res.status(200).send(response)
+    return res.send(successResponse(200, [{
+        "auth-token": result
+    }])).status(200)
 }
 
 // Company Admin LogIn

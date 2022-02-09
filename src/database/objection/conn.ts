@@ -5,7 +5,8 @@ const {development} = require('./knexfile')
 
 export async function dbInit() {
     try {
-        const dbInit = knex(development)
+        const dbInit: any = knex(development)
+        
         Model.knex(dbInit)
 
         console.log('Database Connection Successful')

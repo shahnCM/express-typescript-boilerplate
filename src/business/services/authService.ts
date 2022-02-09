@@ -8,14 +8,14 @@ import {getWorkerPull} from "../../multiThreading/workerpullThreads";
 export const grantToken = async (email: string, password: string): Promise<string|Error> => {
 
     // Retrieve user
-    const user: any = await User.query()
+    let user: any = await User.query()
         .select('id_users', 'password', 'role_id')
         .where('email', '=', email)
-        .first();
-
+        .first()
+    
     // Check if user exists
     if(!user) {
-        return new AuthenticationError()
+        throw new AuthenticationError()
     }
 
     // Compare password

@@ -10,7 +10,7 @@ import multer from "multer";
 export function handleError(app: Application): any {
 
     // Handle 404
-    app.use((req: Request, res: Response, next: NextFunction): void => next(new NotFoundError('Requested URL was not found!')))
+    app.use((req: Request, res: Response, next: NextFunction): any => next(new NotFoundError('Requested URL was not found!')))
 
     // Handle All Error
     app.use((err: any, req: Request, res: Response, next: NextFunction): any => {
@@ -56,5 +56,10 @@ export function handleError(app: Application): any {
                 ))
             }
         }
+        
+        return res.status(500).send(errorResponse(
+            500,
+            [{msg: 'Internal Server Error'}]
+        ))
     })
 }

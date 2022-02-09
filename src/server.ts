@@ -1,28 +1,21 @@
-import { Application } from "express";
+import { Application, Request, Response, NextFunction } from "express";
+import { keepAlive } from "./keepAlive";
 
 const port: string = '9000'
 
-export function bootServer(app: Application): void {
+export async function bootServer(app: Application): Promise<void> {
+
+    // Anti Crash
+    keepAlive(app)
+
     try {
         // Boot Server
         app.listen(port, (): void => {
             console.log(`Connected successfully on port ${port}`)
         });
+
     } catch (error: any) {
         console.error(`Error Occurred: ${error.message}`)
     }
-
-    process.on('unhandledRejection', (err) => {
-        console.error({
-            message: "=== UNHANDLED REJECTION ===",
-            stacktrace: err
-        })
-    });
-    
-    process.on('uncaughtException', (err) => {
-        console.error({
-            message: "=== UNCAUGHT EXCEPTION ===",
-            stacktrace: err
-        });
-    });
 }
+
