@@ -7,7 +7,7 @@ import {eventObject} from "../../events";
 import {SystemAdminLogInAttemptEventEmitter} from "../../events/emitters/SystemAdminLogInAttemptEventEmitter";
 
 // System Admin LogIn
-export async function logInSystemAdmin(req: Request, res: Response, next: NextFunction): Promise<any> {
+export async function logInSystemAdmin(req: Request, res: Response): Promise<any> {
 
     // SystemAdminLogInAttemptEventEmitter(SystemAdminLogInAttemptEvent, req.body)
 
