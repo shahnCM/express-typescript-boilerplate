@@ -1,7 +1,7 @@
 import { Application, Request, Response, NextFunction } from "express";
 import { keepAlive } from "./keepAlive";
 
-const port: string = '9000'
+const port: string = '8000'
 
 export async function bootServer(app: Application): Promise<void> {
 

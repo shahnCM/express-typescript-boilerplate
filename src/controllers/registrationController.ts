@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { Request, Response } from "express";
 
 export async function registerCompanyAdmin(req: Request, res: Response): Promise<Response> {
 

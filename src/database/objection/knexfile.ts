@@ -5,48 +5,49 @@ const mysqlConnection: object = {
   host: "mysql-5",
   user: "root",
   password: "root",
-  database: "auto_part_dev"
+  database: "test_projects"
 }
 
-module.exports = {
-  development: {
-    client: 'mysql2',
-    connection: mysqlConnection,
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    },
-    seed: {
-      directory: './seeds'
-    },
-    ...knexSnakeCaseMappers,
+export const development: object = {
+  client: 'mysql2',
+  connection: mysqlConnection,
+  pool: {
+    min: 2,
+    max: 10
   },
-  staging: {
-    client: 'postgresql',
-    connection: mysqlConnection,
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    },
-    ...knexSnakeCaseMappers,
+  migrations: {
+    tableName: 'knex_migrations'
   },
-  production: {
-    client: 'postgresql',
-    connection: mysqlConnection,
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    },
-    ...knexSnakeCaseMappers,
-  }
+  seed: {
+    directory: './seeds'
+  },
+  ...knexSnakeCaseMappers,
 }
+
+export const staging: object = {
+  client: 'postgresql',
+  connection: mysqlConnection,
+  pool: {
+    min: 2,
+    max: 10
+  },
+  migrations: {
+    tableName: 'knex_migrations'
+  },
+  ...knexSnakeCaseMappers,
+}
+
+export const production: object = {
+  client: 'postgresql',
+  connection: mysqlConnection,
+  pool: {
+    min: 2,
+    max: 10
+  },
+  migrations: {
+    tableName: 'knex_migrations'
+  },
+  ...knexSnakeCaseMappers,
+}
+
 

@@ -1,10 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { grantToken } from "../services/authService";
-import {successResponse} from "../../utils/commonUtils";
-import {SystemAdminLogInAttemptEvent} from "../../events/eventList";
+import {successResponse} from "../utils/apiResponser";
+import {SystemAdminLogInAttemptEvent} from "../events/eventList";
 import events from "events";
-import {eventObject} from "../../events";
-import {SystemAdminLogInAttemptEventEmitter} from "../../events/emitters/SystemAdminLogInAttemptEventEmitter";
+import {eventObject} from "../events";
+import {SystemAdminLogInAttemptEventEmitter} from "../events/emitters/SystemAdminLogInAttemptEventEmitter";
+import { AuthenticationError } from "../errors/AuthenticationError";
+import { AuthorizationError } from "../errors/AuthorizationError";
+import { ValidationError } from "objection";
+import { UploadError } from "../errors/UploadError";
+import { bigDataProcessing } from "../services/testService";
 
 // System Admin LogIn
 export async function testAction(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -37,6 +42,15 @@ export async function testAction(req: Request, res: Response, next: NextFunction
 
     // call(req, res, next)
 
-    throw Error('WOW')
+    throw new UploadError
+
+}
+
+export async function testAction2(req: Request, res: Response, next: NextFunction): Promise<any> {
+    console.log('TEST ACTION 2')
+    let n: number = await bigDataProcessing()
+    return res.status(200).send(successResponse(200, [{
+        "number": n
+    }]))
 
 }

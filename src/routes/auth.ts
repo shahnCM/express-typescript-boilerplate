@@ -4,8 +4,9 @@ import { catchValidationErrors } from '../middlewares/validationErrors';
 import { companyAdminRegistrationValidator } from '../validators/registrationValidators';
 import { companyAdminLogInValidator } from '../validators/logInValidators';
 import { passIfLoggedIn, blockIfLoggedIn } from '../middlewares/auth';
-import { logInCompanyAdmin, logInSystemAdmin } from '../business/controllers/logInController';
-import { registerCompanyAdmin } from '../business/controllers/registrationController';
+import { logInCompanyAdmin, logInSystemAdmin } from '../controllers/logInController';
+import { registerCompanyAdmin } from '../controllers/registrationController';
+import { dispatchAction } from '../utils/actionDispatcher';
 
 const router = Router();
 
@@ -14,19 +15,19 @@ router.post('/register/company', [
     upload.fields([{name: 'company_logo', maxCount: 1}]), 
     ...companyAdminRegistrationValidator, 
     catchValidationErrors
-], registerCompanyAdmin)
+], dispatchAction(registerCompanyAdmin))
 
 router.post('/login/company-admin', [
     blockIfLoggedIn,
     ...companyAdminLogInValidator, 
     catchValidationErrors
-], logInCompanyAdmin)
+], dispatchAction(logInCompanyAdmin))
 
 router.post('/login/system-admin', [
     blockIfLoggedIn,
     ...companyAdminLogInValidator, 
     catchValidationErrors 
-], async (req: Request, res: Response, next: NextFunction) => await logInSystemAdmin(req, res).catch(next))
+], dispatchAction(logInSystemAdmin))
   
 
 //Export All Routes
