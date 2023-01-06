@@ -3,7 +3,6 @@ import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { User } from "../database/objection/models/User";
 import { AuthenticationError } from "../errors/AuthenticationError";
-import { getWorkerPool } from "../multiThreading/workerpullThreads";
 
 export const grantToken = async (email: string, password: string): Promise<string | Error> => {
 
@@ -19,7 +18,7 @@ export const grantToken = async (email: string, password: string): Promise<strin
     }
 
     // Compare password
-    const passwordMatch = await getWorkerPool().comparePassword(password, user.password)
+    const passwordMatch: boolean = await comparePassword(password, user.password)
 
     // Check if password matches
     if (!passwordMatch) {
@@ -36,22 +35,19 @@ export const grantToken = async (email: string, password: string): Promise<strin
     }
 
     // Generate & Return JWT token
-    return await getWorkerPool().jwtSign(
-        payload, config.get('jwtSettings-secret'), {
-        expiresIn: config.get('jwtSettings-expiresIn')
-    })
+    const jwtSecret: string = config.get('jwtSettings-secret')
+    const expiresIn: string = config.get('jwtSettings-expiresIn')
+    const token: string = await jwtSign(payload, jwtSecret, {expiresIn})
+
+    return token
 }
 
 // Sign JWT
 export async function jwtSign(payload: any, secret: string, options: object): Promise<any> {
-    let token = jwt.sign(payload, secret, options)
-    console.log('token: ', token);
-    return token
+    return jwt.sign(payload, secret, options)
 }
 
 // Compare passwords
 export async function comparePassword(one: string, two: string): Promise<boolean> {
-    let hash = await bcrypt.compare(one, two)
-    console.log('hash: ', hash)
-    return hash    
+    return await bcrypt.compare(one, two)    
 }

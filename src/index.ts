@@ -4,7 +4,6 @@ import { bootServer } from './server'
 import { initiateRoutes } from './routes'
 import { dbInit } from './database/objection/conn'
 import { initiateEventListeners } from './events/listeners'
-import { initiateWorkerPool } from './multiThreading/workerpullThreads'
 import { initiateRabbitMqConsumers } from './channels/rabbitmq'
 import { initiateEmailQueueScheduler } from './jobs/queueSchedulers'
 
@@ -25,8 +24,6 @@ console.log("BOOTING UP ...");
     await initiateRoutes(app)
     // Initiate EventListeners
     await initiateEventListeners()
-    // Initiate WorkerPulls
-    await initiateWorkerPool()
     // Initiate RabbitMq Consumers
     await initiateRabbitMqConsumers()
     // Initiate QueueScheduler

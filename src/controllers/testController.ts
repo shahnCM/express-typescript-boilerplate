@@ -47,7 +47,6 @@ export async function testAction(req: Request, res: Response, next: NextFunction
 }
 
 export async function testAction2(req: Request, res: Response, next: NextFunction): Promise<any> {
-    console.log('TEST ACTION 2')
     let n: number = await bigDataProcessing()
     return res.status(200).send(successResponse(200, [{
         "number": n
