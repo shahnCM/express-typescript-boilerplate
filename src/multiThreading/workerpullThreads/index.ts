@@ -10,7 +10,7 @@ export const options: object = {
 }
 
 export const initiateWorkerPool = async (optionsGiven: any = options): Promise<any> => {
-    pool = workerpool.pool(Path.join(__dirname, './threadFunctions.js'), options)
+    pool = workerpool.pool(Path.join(__dirname, './threadFunctions.js'), optionsGiven)
     poolProxy = await pool.proxy()
     
     console.log(
